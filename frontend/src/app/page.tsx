@@ -7,6 +7,8 @@ export default function Home() {
   const [healthStatus, setHealthStatus] = useState<string>("Checking...");
 
   useEffect(() => {
+    console.log(`Frontend Environment: ${process.env.NODE_ENV}`);
+
     const checkHealth = async () => {
       try {
         const response = await fetch("http://localhost:3001/health");
@@ -18,11 +20,11 @@ export default function Home() {
       }
     };
 
-    const intervalId = setInterval(checkHealth, 5000); // Poll every 5 seconds
+    const intervalId = setInterval(checkHealth, 10000);
 
-    checkHealth(); // Initial check
+    checkHealth();
 
-    return () => clearInterval(intervalId); // Cleanup on unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
